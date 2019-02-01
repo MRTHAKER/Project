@@ -7,3 +7,12 @@ c:\users\user\documents\visual studio 2012\Projects\Reminder\Reminder\obj\Debug\
 c:\users\user\documents\visual studio 2012\Projects\Reminder\Reminder\obj\Debug\Reminder.csproj.GenerateResource.Cache
 c:\users\user\documents\visual studio 2012\Projects\Reminder\Reminder\obj\Debug\Reminder.exe
 c:\users\user\documents\visual studio 2012\Projects\Reminder\Reminder\obj\Debug\Reminder.pdb
+C:\Users\Om\Documents\Visual Studio 2012\Project\Reminder\bin\Debug\Reminder.exe.config
+C:\Users\Om\Documents\Visual Studio 2012\Project\Reminder\obj\Debug\Reminder.exe
+C:\Users\Om\Documents\Visual Studio 2012\Project\Reminder\obj\Debug\Reminder.pdb
+C:\Users\Om\Documents\Visual Studio 2012\Project\Reminder\obj\Debug\Reminder.csprojResolveAssemblyReference.cache
+C:\Users\Om\Documents\Visual Studio 2012\Project\Reminder\obj\Debug\Reminder.Form1.resources
+C:\Users\Om\Documents\Visual Studio 2012\Project\Reminder\obj\Debug\Reminder.Properties.Resources.resources
+C:\Users\Om\Documents\Visual Studio 2012\Project\Reminder\obj\Debug\Reminder.csproj.GenerateResource.Cache
+C:\Users\Om\Documents\Visual Studio 2012\Project\Reminder\bin\Debug\Reminder.exe
+C:\Users\Om\Documents\Visual Studio 2012\Project\Reminder\bin\Debug\Reminder.pdb

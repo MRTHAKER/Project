@@ -8,6 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Diagnostics;
+using System.Threading;
 
 
 namespace Reminder
@@ -15,13 +16,17 @@ namespace Reminder
     public partial class Form1 : Form
     {
         private int counter;
-        Timer t = new Timer();
+        
 
         public Form1()
         {
             InitializeComponent();
             date.CustomFormat = "dd-mmm-yyyy";
             time.CustomFormat = "hh:mm:ss tt";
+            /*Thread tt = new Thread(
+    () => check()
+);
+            tt.Start();*/
 
            
         }
@@ -39,14 +44,15 @@ namespace Reminder
             TimeZoneInfo INDIAN_ZONE = TimeZoneInfo.FindSystemTimeZoneById("India Standard Time");
             DateTime indianTime = TimeZoneInfo.ConvertTimeFromUtc(DateTime.UtcNow, INDIAN_ZONE);
             return indianTime;
+           
 
         }
 
         private void button1_Click(object sender, EventArgs e)
         {
-            //label8.Visible = true;
-            //label8.Text = time.Value.ToShortTimeString();
+            
             msgbox();
+
         }
         
         public void msgbox()
@@ -71,32 +77,28 @@ namespace Reminder
             {
 
             }*/
-            Int32 hh = time.Value.Hour;
-            Int32 mm = time.Value.Minute;
-            Int32 ss = time.Value.Second;
+            /*DateTime dt = date.Value;
+            DateTime dt2 = getdate();
+            int result = DateTime.Compare(dt, dt2);
+            MessageBox.Show(""+result);*/
 
-            counter = 58;
-                t.Interval = 1000;
-                t.Enabled = true;
-                timer1_Tick(null, null);
-
-                t.Tick += new EventHandler(timer1_Tick);
             
         }
 
-        private void timer1_Tick(object sender, EventArgs e)
+
+
+
+        public void check()
         {
-            if (DateTime.Now.Second >= counter)
-            {
-                
-                t.Enabled = false;
-            }
-            else
-            {
-                //do something here
-                MessageBox.Show("BilBul");
-                counter++;
-            } 
+
+
+        }
+
+        
+
+        private void date_ValueChanged(object sender, EventArgs e)
+        {
+
         }
     }
 }
