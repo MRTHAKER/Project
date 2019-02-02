@@ -16,3 +16,5 @@ C:\Users\Om\Documents\Visual Studio 2012\Project\Reminder\obj\Debug\Reminder.Pro
 C:\Users\Om\Documents\Visual Studio 2012\Project\Reminder\obj\Debug\Reminder.csproj.GenerateResource.Cache
 C:\Users\Om\Documents\Visual Studio 2012\Project\Reminder\bin\Debug\Reminder.exe
 C:\Users\Om\Documents\Visual Studio 2012\Project\Reminder\bin\Debug\Reminder.pdb
+C:\Users\Om\Documents\Visual Studio 2012\Project\Reminder\bin\Debug\SequenceDiagram1.mdf
+C:\Users\Om\Documents\Visual Studio 2012\Project\Reminder\bin\Debug\SequenceDiagram1_log.ldf
