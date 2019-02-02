@@ -10,6 +10,7 @@ using System.Windows.Forms;
 using System.Diagnostics;
 using System.Threading;
 using System.Data.SqlClient;
+using System.Globalization;
 
 
 namespace Reminder
@@ -44,7 +45,12 @@ namespace Reminder
         {
             SqlConnection con = conn();
             con.Open();
-            string q = "insert into rem values ('" + textBox1.Text + "','" + comboBox2.SelectedItem + "','" + comboBox1.SelectedItem + "','" + comboBox3.SelectedItem + "','" + textBox2.Text + "','"+textBox3.Text+"','"+comboBox4.SelectedItem+"')";
+            String time = textBox1.Text+" "+ comboBox2.SelectedItem + ":" + comboBox1.SelectedItem + ":" + comboBox4.SelectedItem + " " + comboBox3.SelectedItem;
+            DateTime ti = DateTime.Parse(time);
+            ti = ti - new TimeSpan(0, 30, 0);
+            //label11.Text = ti.ToString();
+            //label10.Text = getdate().ToString();
+            string q = "insert into rem values ('" + textBox2.Text + "','"+textBox3.Text+"','"+ti.ToString()+"')";
             SqlCommand cmd = new SqlCommand(q, con);
             int k = cmd.ExecuteNonQuery();
             con.Close();
@@ -105,42 +111,35 @@ namespace Reminder
                 DataTable dataTable = new DataTable();
                 dataTable.Load(dr);
                 int i = dataTable.Rows.Count;
-                String[] date = new String[i];
-                String[] hour = new String[i];
-                String[] min = new String[i];
-                String[] ap = new String[i];
+                String[] time = new String[i];
                 String[] to = new String[i];
                 String[] msg = new String[i];
-                String[] sec = new String[i];
                 int k = 0;
-
                 foreach (DataRow row in dataTable.Rows)
                 {
-                    date[k] = row["date"].ToString();
-                    hour[k] = row["hour"].ToString();
-                    min[k] = row["min"].ToString();
-                    sec[k] = row["sec"].ToString();
-                    ap[k] = row["ap"].ToString();
+                    time[k]=row["time"].ToString();
                     to[k] = row["to"].ToString();
                     msg[k] = row["msg"].ToString();
                     k++;
-
-
                 }
-                String full = date[0] + " " + hour[0] + ":" + min[0] + ":" + sec[0] + " " + ap[0];
-                DateTime dt = Convert.ToDateTime(full);
-                dt.AddMinutes(-30);
-                label11.Text = getdate().ToString();
-                label10.Text = dt.ToString();
-                if (full.Equals(getdate().ToString()))
+                for (int ii = 0; ii <= i;ii++)
                 {
-                    MessageBox.Show("time");
+                    String full = time[ii];
+                    String too = to[ii];
+                    String ms = msg[ii];
+                    label11.Text = getdate().ToString();
+                    label10.Text = full;
+                    if (full.Equals(getdate().ToString()))
+                    {
+                        MessageBox.Show("" + full + " " + too + " " + ms);
+                    }
                 }
+                
             }
             catch(Exception e){}
-            
-            
-            
+
+
+
 
         }
 
