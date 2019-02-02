@@ -40,16 +40,15 @@ namespace Reminder
         {
             TimeZoneInfo INDIAN_ZONE = TimeZoneInfo.FindSystemTimeZoneById("India Standard Time");
             DateTime indianTime = TimeZoneInfo.ConvertTimeFromUtc(DateTime.UtcNow, INDIAN_ZONE);
-            return indianTime;
-           
-
+           return indianTime.Date;
+            
         }
 
         private void button1_Click(object sender, EventArgs e)
         {
             SqlConnection con = conn();
             con.Open();
-            string q = "insert into rem values ('" + textBox1.Text + "','" + comboBox1.SelectedItem + "','" + comboBox2.SelectedItem + "','" + comboBox3.SelectedItem + "','" + textBox2.Text + "','" + textBox3.Text + "')";
+            string q = "insert into rem values ('" + textBox1.Text + "','" + comboBox2.SelectedItem + "','" + comboBox1.SelectedItem + "','" + comboBox3.SelectedItem + "','" + textBox2.Text + "','"+textBox3.Text+"','"+comboBox4.SelectedItem+"')";
             SqlCommand cmd = new SqlCommand(q, con);
             int k = cmd.ExecuteNonQuery();
             con.Close();
@@ -99,31 +98,33 @@ namespace Reminder
             DataTable dataTable = new DataTable();
             dataTable.Load(dr);
             int i = dataTable.Rows.Count;
-            String[] id = new String[i];
             String[] date = new String[i];
             String[] hour = new String[i];
             String[] min = new String[i];
             String[] ap = new String[i];
             String[] to = new String[i];
             String[] msg = new String[i];
+            String[] sec = new String[i];
             int k = 0;
             foreach (DataRow row in dataTable.Rows)
             {
-                
-                
-                id[k] = row["Id"].ToString();
                 date[k] = row["date"].ToString();
                 hour[k] = row["hour"].ToString();
                 min[k] = row["min"].ToString();
+                sec[k] = row["sec"].ToString();
                 ap[k] = row["ap"].ToString();
                 to[k] = row["to"].ToString();
                 msg[k] = row["msg"].ToString();
                 k++;
-            
+                
                 
             }
 
-            MessageBox.Show("'" + id[0] + "''" + date[0] + "''" + hour[0] + "''" + min[0] + "''" + ap[0] + "''" + to[0] + "''" + msg[0] + "'");
+            MessageBox.Show("'"+sec[0]+"'" + date[0] + "'" + hour[0] + "'" + min[0] + "'" + ap[0] + "'" + to[0] + "" + msg[0]+"");
+            String full = date[0]+" "+hour[0]+":" + min[0]+":"+sec[0]+" " +ap[0];
+            label10.Text = full;
+            label11.Text = getdate().ToString();
+            
 
         }
 
