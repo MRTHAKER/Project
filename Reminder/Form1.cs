@@ -17,30 +17,26 @@ namespace Reminder
     public partial class Form1 : Form
     {
         private int counter;
-        
+
 
         public Form1()
         {
             InitializeComponent();
-          
+            doProcess();
             
-            /*Thread tt = new Thread(
-    () => check()
-);
-            tt.Start();*/
-            }
+            
+        }
 
          
         private void button2_Click(object sender, EventArgs e)
         {
-
-            check();
+            //check();
         }
         public DateTime getdate()
         {
             TimeZoneInfo INDIAN_ZONE = TimeZoneInfo.FindSystemTimeZoneById("India Standard Time");
             DateTime indianTime = TimeZoneInfo.ConvertTimeFromUtc(DateTime.UtcNow, INDIAN_ZONE);
-           return indianTime.Date;
+            return indianTime;
             
         }
 
@@ -54,6 +50,15 @@ namespace Reminder
             con.Close();
             if (k > 0) { label10.Text = "done"; }
             else { label10.Text = "derp"; }
+        }
+
+        public async void doProcess()
+        {
+            while (true)
+            {
+                await Task.Delay(1000);
+                check();
+            }
         }
         
         public void msgbox()
@@ -91,39 +96,50 @@ namespace Reminder
 
         public void check()
         {
-            SqlConnection con = conn();
-            con.Open();
-            SqlCommand cm = new SqlCommand("Select * from rem", con);
-            SqlDataReader dr = cm.ExecuteReader();
-            DataTable dataTable = new DataTable();
-            dataTable.Load(dr);
-            int i = dataTable.Rows.Count;
-            String[] date = new String[i];
-            String[] hour = new String[i];
-            String[] min = new String[i];
-            String[] ap = new String[i];
-            String[] to = new String[i];
-            String[] msg = new String[i];
-            String[] sec = new String[i];
-            int k = 0;
-            foreach (DataRow row in dataTable.Rows)
+            try
             {
-                date[k] = row["date"].ToString();
-                hour[k] = row["hour"].ToString();
-                min[k] = row["min"].ToString();
-                sec[k] = row["sec"].ToString();
-                ap[k] = row["ap"].ToString();
-                to[k] = row["to"].ToString();
-                msg[k] = row["msg"].ToString();
-                k++;
-                
-                
-            }
+                SqlConnection con = conn();
+                con.Open();
+                SqlCommand cm = new SqlCommand("Select * from rem", con);
+                SqlDataReader dr = cm.ExecuteReader();
+                DataTable dataTable = new DataTable();
+                dataTable.Load(dr);
+                int i = dataTable.Rows.Count;
+                String[] date = new String[i];
+                String[] hour = new String[i];
+                String[] min = new String[i];
+                String[] ap = new String[i];
+                String[] to = new String[i];
+                String[] msg = new String[i];
+                String[] sec = new String[i];
+                int k = 0;
 
-            MessageBox.Show("'"+sec[0]+"'" + date[0] + "'" + hour[0] + "'" + min[0] + "'" + ap[0] + "'" + to[0] + "" + msg[0]+"");
-            String full = date[0]+" "+hour[0]+":" + min[0]+":"+sec[0]+" " +ap[0];
-            label10.Text = full;
-            label11.Text = getdate().ToString();
+                foreach (DataRow row in dataTable.Rows)
+                {
+                    date[k] = row["date"].ToString();
+                    hour[k] = row["hour"].ToString();
+                    min[k] = row["min"].ToString();
+                    sec[k] = row["sec"].ToString();
+                    ap[k] = row["ap"].ToString();
+                    to[k] = row["to"].ToString();
+                    msg[k] = row["msg"].ToString();
+                    k++;
+
+
+                }
+                String full = date[0] + " " + hour[0] + ":" + min[0] + ":" + sec[0] + " " + ap[0];
+                DateTime dt = Convert.ToDateTime(full);
+                dt.AddMinutes(-30);
+                label11.Text = getdate().ToString();
+                label10.Text = dt.ToString();
+                if (full.Equals(getdate().ToString()))
+                {
+                    MessageBox.Show("time");
+                }
+            }
+            catch(Exception e){}
+            
+            
             
 
         }
