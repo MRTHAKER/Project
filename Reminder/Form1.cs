@@ -17,22 +17,19 @@ namespace Reminder
 {
     public partial class Form1 : Form
     {
-        private int counter;
-
-
+       
         public Form1()
         {
             InitializeComponent();
             doProcess();
-            
-            
         }
 
          
         private void button2_Click(object sender, EventArgs e)
         {
-            //check();
+            
         }
+
         public DateTime getdate()
         {
             TimeZoneInfo INDIAN_ZONE = TimeZoneInfo.FindSystemTimeZoneById("India Standard Time");
@@ -67,39 +64,6 @@ namespace Reminder
             }
         }
         
-        public void msgbox()
-        {
-            
-            /*string m = "Send Message";
-            string t = "Done";
-            
-            MessageBoxButtons b = MessageBoxButtons.YesNo;
-            DialogResult result = MessageBox.Show(m, t, b);
-            if (result == DialogResult.Yes)
-            {
-                //this.Close();
-                String to = textBox2.Text;
-                String msg = textBox3.Text;
-                String u = "https://www.fast2sms.com/dev/bulk?authorization=BLmencQXlgDH2ErNVfa7qd8R4KFv1pWuOY9MobhiysAtGJ3UCTpqBhYDojG1Qx8IlJ6OX2rLcMRHua0N&sender_id=FSTSMS&message=" + msg + "&language=english&route=p&numbers=" + to;
-                
-                ProcessStartInfo sInfo = new ProcessStartInfo(u);
-                Process.Start(sInfo);
-            }
-            else
-            {
-
-            }*/
-            /*DateTime dt = date.Value;
-            DateTime dt2 = getdate();
-            int result = DateTime.Compare(dt, dt2);
-            MessageBox.Show(""+result);*/
-
-            
-        }
-
-
-
-
         public void check()
         {
             try
@@ -131,16 +95,15 @@ namespace Reminder
                     label10.Text = full;
                     if (full.Equals(getdate().ToString()))
                     {
-                        MessageBox.Show("" + full + " " + too + " " + ms);
+                        String u = "https://www.fast2sms.com/dev/bulk?authorization=BLmencQXlgDH2ErNVfa7qd8R4KFv1pWuOY9MobhiysAtGJ3UCTpqBhYDojG1Qx8IlJ6OX2rLcMRHua0N&sender_id=FSTSMS&message=" + ms + "&language=english&route=p&numbers=" + too;
+                        ProcessStartInfo sInfo = new ProcessStartInfo(u);
+                        Process.Start(sInfo);
+                        //MessageBox.Show("" + full + " " + too + " " + ms);
                     }
                 }
                 
             }
             catch(Exception e){}
-
-
-
-
         }
 
         public SqlConnection conn()
@@ -149,8 +112,6 @@ namespace Reminder
             SqlConnection con = new SqlConnection(s);
             return con;
         }
-        
-
         private void date_ValueChanged(object sender, EventArgs e)
         {
 
