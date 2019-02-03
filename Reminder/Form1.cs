@@ -12,6 +12,8 @@ using System.Threading;
 using System.Data.SqlClient;
 using System.Globalization;
 using System.Text.RegularExpressions;
+using System.Net;
+using System.IO;
 
 
 namespace Reminder
@@ -22,7 +24,7 @@ namespace Reminder
         public Form1()
         {
             InitializeComponent();
-            textBox1.Text = "Enter Date DD/MM/YYYY";
+            textBox1.Text = "Enter Date MM/DD/YYYY";
             textBox1.GotFocus += textBox1_GotFocus;
             textBox1.LostFocus += textBox1_LostFocus;
             doProcess();
@@ -31,7 +33,13 @@ namespace Reminder
          
         private void button2_Click(object sender, EventArgs e)
         {
-            
+            textBox1.Text = "Enter Date MM/DD/YYYY";
+            textBox2.Text = "";
+            textBox3.Text = "";
+            comboBox1.SelectedIndex = -1;
+            comboBox2.SelectedIndex = -1;
+            comboBox3.SelectedIndex = -1;
+            comboBox4.SelectedIndex = -1;
         }
 
         public DateTime getdate()
@@ -39,7 +47,6 @@ namespace Reminder
             TimeZoneInfo INDIAN_ZONE = TimeZoneInfo.FindSystemTimeZoneById("India Standard Time");
             DateTime indianTime = TimeZoneInfo.ConvertTimeFromUtc(DateTime.UtcNow, INDIAN_ZONE);
             return indianTime;
-            
         }
 
         private void button1_Click(object sender, EventArgs e)
@@ -73,7 +80,7 @@ namespace Reminder
                 comboBox1.Focus();
             }
 
-            else if (textBox1.Text.Equals("Enter Date DD/MM/YYYY"))
+            else if (textBox1.Text.Equals("Enter Date MM/DD/YYYY"))
             {
                 MessageBox.Show("Enter Date");
                 textBox1.Focus();
@@ -108,6 +115,13 @@ namespace Reminder
                 con.Close();
                 if (k > 0) { label10.Text = "done"; }
                 else { label10.Text = "derp"; }
+                textBox1.Text = "Enter Date MM/DD/YYYY";
+                textBox2.Text = "";
+                textBox3.Text = "";
+                comboBox1.SelectedIndex = -1;
+                comboBox2.SelectedIndex = -1;
+                comboBox3.SelectedIndex = -1;
+                comboBox4.SelectedIndex = -1;
             }
         }
 
@@ -122,8 +136,6 @@ namespace Reminder
         
         public void check()
         {
-            
-
             try
             {
                 SqlConnection con = conn();
@@ -153,10 +165,8 @@ namespace Reminder
                     label10.Text = full;
                     if (full.Equals(getdate().ToString()))
                     {
-                        String u = "https://www.fast2sms.com/dev/bulk?authorization=BLmencQXlgDH2ErNVfa7qd8R4KFv1pWuOY9MobhiysAtGJ3UCTpqBhYDojG1Qx8IlJ6OX2rLcMRHua0N&sender_id=FSTSMS&message=" + ms + "&language=english&route=p&numbers=" + too;
-                        ProcessStartInfo sInfo = new ProcessStartInfo(u);
-                        Process.Start(sInfo);
-                        //MessageBox.Show("" + full + " " + too + " " + ms);
+                        HttpWebRequest request = WebRequest.Create("https://www.fast2sms.com/dev/bulk?authorization=BLmencQXlgDH2ErNVfa7qd8R4KFv1pWuOY9MobhiysAtGJ3UCTpqBhYDojG1Qx8IlJ6OX2rLcMRHua0N&sender_id=FSTSMS&message=" + ms + "&language=english&route=p&numbers=" + too) as HttpWebRequest;
+                        HttpWebResponse response = request.GetResponse() as HttpWebResponse;
                     }
                 }
                 
@@ -170,15 +180,11 @@ namespace Reminder
             SqlConnection con = new SqlConnection(s);
             return con;
         }
-        private void date_ValueChanged(object sender, EventArgs e)
-        {
-
-        }
         void textBox1_LostFocus(object sender, EventArgs e)
         {
             if (String.IsNullOrEmpty(textBox1.Text))
             {
-                textBox1.Text = "Enter Date DD/MM/YYYY";
+                textBox1.Text = "Enter Date MM/DD/YYYY";
             }
             
         }
@@ -187,7 +193,7 @@ namespace Reminder
         {
             if (String.IsNullOrEmpty(textBox1.Text))
             {
-                textBox1.Text = "Enter Date DD/MM/YYYY";
+                textBox1.Text = "Enter Date MM/DD/YYYY";
             }
             else { textBox1.Text = ""; }
         }
@@ -204,10 +210,7 @@ namespace Reminder
         private void textBox2_Leave(object sender, EventArgs e)
         {
             Regex pattern = new Regex(@"^[0-9]{10}$");
-            if (pattern.IsMatch(textBox2.Text))
-            {
-                
-            }
+            if (pattern.IsMatch(textBox2.Text)){}
             else
             {
                 MessageBox.Show("Invalid phone number");
