@@ -11,6 +11,7 @@ using System.Diagnostics;
 using System.Threading;
 using System.Data.SqlClient;
 using System.Globalization;
+using System.Text.RegularExpressions;
 
 
 namespace Reminder
@@ -21,6 +22,9 @@ namespace Reminder
         public Form1()
         {
             InitializeComponent();
+            textBox1.Text = "Enter Date DD/MM/YYYY";
+            textBox1.GotFocus += textBox1_GotFocus;
+            textBox1.LostFocus += textBox1_LostFocus;
             doProcess();
         }
 
@@ -40,19 +44,71 @@ namespace Reminder
 
         private void button1_Click(object sender, EventArgs e)
         {
-            SqlConnection con = conn();
-            con.Open();
-            String time = textBox1.Text+" "+ comboBox2.SelectedItem + ":" + comboBox1.SelectedItem + ":" + comboBox4.SelectedItem + " " + comboBox3.SelectedItem;
-            DateTime ti = DateTime.Parse(time);
-            ti = ti - new TimeSpan(0, 30, 0);
-            //label11.Text = ti.ToString();
-            //label10.Text = getdate().ToString();
-            string q = "insert into rem values ('" + textBox2.Text + "','"+textBox3.Text+"','"+ti.ToString()+"')";
-            SqlCommand cmd = new SqlCommand(q, con);
-            int k = cmd.ExecuteNonQuery();
-            con.Close();
-            if (k > 0) { label10.Text = "done"; }
-            else { label10.Text = "derp"; }
+
+            if (String.IsNullOrEmpty(textBox1.Text))
+            {
+                MessageBox.Show("Date Can't be Empty");
+                textBox1.Focus();
+            }
+            else if (String.IsNullOrEmpty(textBox2.Text))
+            {
+                MessageBox.Show("Number Can't be Empty");
+                textBox2.Focus();
+            }
+            else if (System.Text.RegularExpressions.Regex.IsMatch(textBox2.Text, "[^0-9]"))
+            {
+                MessageBox.Show("Number can't be in Characters");
+                textBox2.Focus();
+                textBox2.Text = textBox2.Text.Remove(textBox2.Text.Length - 1);
+            }
+
+            else if (String.IsNullOrEmpty(textBox3.Text))
+            {
+                MessageBox.Show("Message Can't be Empty");
+                textBox3.Focus();
+            }
+            else if (comboBox1.SelectedIndex.Equals(-1))
+            {
+                MessageBox.Show("Select Minutes");
+                comboBox1.Focus();
+            }
+
+            else if (textBox1.Text.Equals("Enter Date DD/MM/YYYY"))
+            {
+                MessageBox.Show("Enter Date");
+                textBox1.Focus();
+            }
+
+            else if (comboBox2.SelectedIndex.Equals(-1))
+            {
+                MessageBox.Show("Select Hour");
+                comboBox2.Focus();
+            }
+            else if (comboBox3.SelectedIndex.Equals(-1))
+            {
+                MessageBox.Show("Select AM/PM");
+                comboBox3.Focus();
+            }
+
+            else if (comboBox4.SelectedIndex.Equals(-1))
+            {
+                MessageBox.Show("Select Seconds");
+                comboBox4.Focus();
+            }
+            else
+            {
+                SqlConnection con = conn();
+                con.Open();
+                String time = textBox1.Text + " " + comboBox2.SelectedItem + ":" + comboBox1.SelectedItem + ":" + comboBox4.SelectedItem + " " + comboBox3.SelectedItem;
+                DateTime ti = DateTime.Parse(time);
+                ti = ti - new TimeSpan(0, 30, 0);
+                string q = "insert into rem values ('" + textBox2.Text + "','" + textBox3.Text + "','" + ti.ToString() + "')";
+                SqlCommand cmd = new SqlCommand(q, con);
+                int k = cmd.ExecuteNonQuery();
+                con.Close();
+                if (k > 0) { label10.Text = "done"; }
+                else { label10.Text = "derp"; }
+            }
         }
 
         public async void doProcess()
@@ -66,6 +122,8 @@ namespace Reminder
         
         public void check()
         {
+            
+
             try
             {
                 SqlConnection con = conn();
@@ -116,15 +174,47 @@ namespace Reminder
         {
 
         }
-
-        private void textBox1_TextChanged(object sender, EventArgs e)
+        void textBox1_LostFocus(object sender, EventArgs e)
         {
-
+            if (String.IsNullOrEmpty(textBox1.Text))
+            {
+                textBox1.Text = "Enter Date DD/MM/YYYY";
+            }
+            
         }
 
-        private void textBox1_TextChanged_1(object sender, EventArgs e)
+        void textBox1_GotFocus(object sender, EventArgs e)
         {
-
+            if (String.IsNullOrEmpty(textBox1.Text))
+            {
+                textBox1.Text = "Enter Date DD/MM/YYYY";
+            }
+            else { textBox1.Text = ""; }
         }
+
+        private void textBox2_TextChanged(object sender, EventArgs e)
+        {
+            if (System.Text.RegularExpressions.Regex.IsMatch(textBox2.Text, "[^0-9]"))
+            {
+                MessageBox.Show("Please enter only numbers.");
+                textBox2.Text = textBox2.Text.Remove(textBox2.Text.Length - 1);
+            }
+        }
+
+        private void textBox2_Leave(object sender, EventArgs e)
+        {
+            Regex pattern = new Regex(@"^[0-9]{10}$");
+            if (pattern.IsMatch(textBox2.Text))
+            {
+                
+            }
+            else
+            {
+                MessageBox.Show("Invalid phone number");
+                textBox2.Focus();
+            }
+        }
+
+        
     }
 }
