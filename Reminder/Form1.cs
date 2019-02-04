@@ -24,16 +24,12 @@ namespace Reminder
         public Form1()
         {
             InitializeComponent();
-            textBox1.Text = "Enter Date MM/DD/YYYY";
-            textBox1.GotFocus += textBox1_GotFocus;
-            textBox1.LostFocus += textBox1_LostFocus;
             doProcess();
         }
 
          
         private void button2_Click(object sender, EventArgs e)
         {
-            textBox1.Text = "Enter Date MM/DD/YYYY";
             textBox2.Text = "";
             textBox3.Text = "";
             comboBox1.SelectedIndex = -1;
@@ -52,12 +48,7 @@ namespace Reminder
         private void button1_Click(object sender, EventArgs e)
         {
 
-            if (String.IsNullOrEmpty(textBox1.Text))
-            {
-                MessageBox.Show("Date Can't be Empty");
-                textBox1.Focus();
-            }
-            else if (String.IsNullOrEmpty(textBox2.Text))
+            if (String.IsNullOrEmpty(textBox2.Text))
             {
                 MessageBox.Show("Number Can't be Empty");
                 textBox2.Focus();
@@ -80,11 +71,6 @@ namespace Reminder
                 comboBox1.Focus();
             }
 
-            else if (textBox1.Text.Equals("Enter Date MM/DD/YYYY"))
-            {
-                MessageBox.Show("Enter Date");
-                textBox1.Focus();
-            }
 
             else if (comboBox2.SelectedIndex.Equals(-1))
             {
@@ -106,8 +92,11 @@ namespace Reminder
             {
                 SqlConnection con = conn();
                 con.Open();
-                String time = textBox1.Text + " " + comboBox2.SelectedItem + ":" + comboBox1.SelectedItem + ":" + comboBox4.SelectedItem + " " + comboBox3.SelectedItem;
+            String s = dateTimePicker3.Value.Date.ToString("d");
+                label10.Text = s;
+                String time =   ""+s+" " + comboBox2.SelectedItem + ":" + comboBox1.SelectedItem + ":" + comboBox4.SelectedItem + " " + comboBox3.SelectedItem;
                 DateTime ti = DateTime.Parse(time);
+                label14.Text = time;
                 ti = ti - new TimeSpan(0, 30, 0);
                 string q = "insert into rem values ('" + textBox2.Text + "','" + textBox3.Text + "','" + ti.ToString() + "')";
                 SqlCommand cmd = new SqlCommand(q, con);
@@ -115,7 +104,6 @@ namespace Reminder
                 con.Close();
                 if (k > 0) { label10.Text = "done"; }
                 else { label10.Text = "derp"; }
-                textBox1.Text = "Enter Date MM/DD/YYYY";
                 textBox2.Text = "";
                 textBox3.Text = "";
                 comboBox1.SelectedIndex = -1;
@@ -123,6 +111,8 @@ namespace Reminder
                 comboBox3.SelectedIndex = -1;
                 comboBox4.SelectedIndex = -1;
             }
+
+           
         }
 
         public async void doProcess()
@@ -176,26 +166,9 @@ namespace Reminder
 
         public SqlConnection conn()
         {
-            string s = @"Data Source=(LocalDB)\v11.0;AttachDbFilename='C:\Users\Om\Documents\Visual Studio 2012\Project\Reminder\SequenceDiagram1.mdf'";
+            string s = @"Data Source=(LocalDB)\v11.0;AttachDbFilename='C:\Users\STUDENT-35\Documents\project\Reminder\SequenceDiagram1.mdf'";
             SqlConnection con = new SqlConnection(s);
             return con;
-        }
-        void textBox1_LostFocus(object sender, EventArgs e)
-        {
-            if (String.IsNullOrEmpty(textBox1.Text))
-            {
-                textBox1.Text = "Enter Date MM/DD/YYYY";
-            }
-            
-        }
-
-        void textBox1_GotFocus(object sender, EventArgs e)
-        {
-            if (String.IsNullOrEmpty(textBox1.Text))
-            {
-                textBox1.Text = "Enter Date MM/DD/YYYY";
-            }
-            else { textBox1.Text = ""; }
         }
 
         private void textBox2_TextChanged(object sender, EventArgs e)
@@ -216,6 +189,11 @@ namespace Reminder
                 MessageBox.Show("Invalid phone number");
                 textBox2.Focus();
             }
+        }
+
+        private void dateTimePicker3_ValueChanged(object sender, EventArgs e)
+        {
+
         }
 
         

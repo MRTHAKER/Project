@@ -37,7 +37,6 @@
             this.label10 = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
             this.comboBox3 = new System.Windows.Forms.ComboBox();
-            this.textBox1 = new System.Windows.Forms.TextBox();
             this.label9 = new System.Windows.Forms.Label();
             this.label8 = new System.Windows.Forms.Label();
             this.comboBox2 = new System.Windows.Forms.ComboBox();
@@ -51,6 +50,8 @@
             this.label5 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
             this.timer1 = new System.Windows.Forms.Timer(this.components);
+            this.dateTimePicker3 = new System.Windows.Forms.DateTimePicker();
+            this.label14 = new System.Windows.Forms.Label();
             this.panel1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -66,13 +67,14 @@
             // 
             // panel1
             // 
+            this.panel1.Controls.Add(this.label14);
+            this.panel1.Controls.Add(this.dateTimePicker3);
             this.panel1.Controls.Add(this.label12);
             this.panel1.Controls.Add(this.comboBox4);
             this.panel1.Controls.Add(this.label11);
             this.panel1.Controls.Add(this.label10);
             this.panel1.Controls.Add(this.label4);
             this.panel1.Controls.Add(this.comboBox3);
-            this.panel1.Controls.Add(this.textBox1);
             this.panel1.Controls.Add(this.label9);
             this.panel1.Controls.Add(this.label8);
             this.panel1.Controls.Add(this.comboBox2);
@@ -207,13 +209,6 @@
             this.comboBox3.Name = "comboBox3";
             this.comboBox3.Size = new System.Drawing.Size(61, 21);
             this.comboBox3.TabIndex = 19;
-            // 
-            // textBox1
-            // 
-            this.textBox1.Location = new System.Drawing.Point(129, 15);
-            this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(150, 20);
-            this.textBox1.TabIndex = 18;
             // 
             // label9
             // 
@@ -407,6 +402,24 @@
             // 
             this.timer1.Interval = 2000;
             // 
+            // dateTimePicker3
+            // 
+            this.dateTimePicker3.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
+            this.dateTimePicker3.Location = new System.Drawing.Point(120, 15);
+            this.dateTimePicker3.Name = "dateTimePicker3";
+            this.dateTimePicker3.Size = new System.Drawing.Size(200, 20);
+            this.dateTimePicker3.TabIndex = 27;
+            this.dateTimePicker3.ValueChanged += new System.EventHandler(this.dateTimePicker3_ValueChanged);
+            // 
+            // label14
+            // 
+            this.label14.AutoSize = true;
+            this.label14.Location = new System.Drawing.Point(122, 154);
+            this.label14.Name = "label14";
+            this.label14.Size = new System.Drawing.Size(41, 13);
+            this.label14.TabIndex = 29;
+            this.label14.Text = "label14";
+            // 
             // Form1
             // 
             this.ClientSize = new System.Drawing.Size(423, 432);
@@ -435,7 +448,6 @@
         private System.Windows.Forms.TextBox textBox2;
         private System.Windows.Forms.Timer timer1;
         private System.Windows.Forms.ComboBox comboBox1;
-        private System.Windows.Forms.TextBox textBox1;
         private System.Windows.Forms.Label label9;
         private System.Windows.Forms.Label label8;
         private System.Windows.Forms.ComboBox comboBox2;
@@ -445,6 +457,8 @@
         private System.Windows.Forms.Label label11;
         private System.Windows.Forms.Label label12;
         private System.Windows.Forms.ComboBox comboBox4;
+        private System.Windows.Forms.DateTimePicker dateTimePicker3;
+        private System.Windows.Forms.Label label14;
 
     }
 }

@@ -18,3 +18,14 @@ C:\Users\Om\Documents\Visual Studio 2012\Project\Reminder\bin\Debug\Reminder.exe
 C:\Users\Om\Documents\Visual Studio 2012\Project\Reminder\bin\Debug\Reminder.pdb
 C:\Users\Om\Documents\Visual Studio 2012\Project\Reminder\bin\Debug\SequenceDiagram1.mdf
 C:\Users\Om\Documents\Visual Studio 2012\Project\Reminder\bin\Debug\SequenceDiagram1_log.ldf
+C:\Users\STUDENT-35\Documents\project\Reminder\bin\Debug\Reminder.exe.config
+C:\Users\STUDENT-35\Documents\project\Reminder\obj\Debug\Reminder.exe
+C:\Users\STUDENT-35\Documents\project\Reminder\obj\Debug\Reminder.pdb
+C:\Users\STUDENT-35\Documents\project\Reminder\bin\Debug\SequenceDiagram1.mdf
+C:\Users\STUDENT-35\Documents\project\Reminder\bin\Debug\SequenceDiagram1_log.ldf
+C:\Users\STUDENT-35\Documents\project\Reminder\bin\Debug\Reminder.exe
+C:\Users\STUDENT-35\Documents\project\Reminder\bin\Debug\Reminder.pdb
+C:\Users\STUDENT-35\Documents\project\Reminder\obj\Debug\Reminder.csprojResolveAssemblyReference.cache
+C:\Users\STUDENT-35\Documents\project\Reminder\obj\Debug\Reminder.Form1.resources
+C:\Users\STUDENT-35\Documents\project\Reminder\obj\Debug\Reminder.Properties.Resources.resources
+C:\Users\STUDENT-35\Documents\project\Reminder\obj\Debug\Reminder.csproj.GenerateResource.Cache
