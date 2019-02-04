@@ -96,14 +96,14 @@ namespace Reminder
                 label10.Text = s;
                 String time =   ""+s+" " + comboBox2.SelectedItem + ":" + comboBox1.SelectedItem + ":" + comboBox4.SelectedItem + " " + comboBox3.SelectedItem;
                 DateTime ti = DateTime.Parse(time);
-                label14.Text = time;
+                String act = ti.ToString();
                 ti = ti - new TimeSpan(0, 30, 0);
-                string q = "insert into rem values ('" + textBox2.Text + "','" + textBox3.Text + "','" + ti.ToString() + "')";
+                string q = "insert into rem values ('" + textBox2.Text + "','" + textBox3.Text + "','" + ti.ToString() + "','" + act + "')";
                 SqlCommand cmd = new SqlCommand(q, con);
                 int k = cmd.ExecuteNonQuery();
                 con.Close();
-                if (k > 0) { label10.Text = "done"; }
-                else { label10.Text = "derp"; }
+                if (k > 0) { label14.Text = "done"; }
+                else { label14.Text = "derp"; }
                 textBox2.Text = "";
                 textBox3.Text = "";
                 comboBox1.SelectedIndex = -1;
@@ -155,8 +155,10 @@ namespace Reminder
                     label10.Text = full;
                     if (full.Equals(getdate().ToString()))
                     {
+                        MessageBox.Show("SMS Is Sent TO: " + too + " With Message: " + ms);
                         HttpWebRequest request = WebRequest.Create("https://www.fast2sms.com/dev/bulk?authorization=BLmencQXlgDH2ErNVfa7qd8R4KFv1pWuOY9MobhiysAtGJ3UCTpqBhYDojG1Qx8IlJ6OX2rLcMRHua0N&sender_id=FSTSMS&message=" + ms + "&language=english&route=p&numbers=" + too) as HttpWebRequest;
                         HttpWebResponse response = request.GetResponse() as HttpWebResponse;
+                        
                     }
                 }
                 
@@ -166,7 +168,7 @@ namespace Reminder
 
         public SqlConnection conn()
         {
-            string s = @"Data Source=(LocalDB)\v11.0;AttachDbFilename='C:\Users\STUDENT-35\Documents\project\Reminder\SequenceDiagram1.mdf'";
+            string s = @"Data Source=(LocalDB)\v11.0;AttachDbFilename='C:\Users\Om\Documents\Visual Studio 2012\project\Reminder\SequenceDiagram1.mdf'";
             SqlConnection con = new SqlConnection(s);
             return con;
         }
@@ -177,17 +179,6 @@ namespace Reminder
             {
                 MessageBox.Show("Please enter only numbers.");
                 textBox2.Text = textBox2.Text.Remove(textBox2.Text.Length - 1);
-            }
-        }
-
-        private void textBox2_Leave(object sender, EventArgs e)
-        {
-            Regex pattern = new Regex(@"^[0-9]{10}$");
-            if (pattern.IsMatch(textBox2.Text)){}
-            else
-            {
-                MessageBox.Show("Invalid phone number");
-                textBox2.Focus();
             }
         }
 

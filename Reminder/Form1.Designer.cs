@@ -365,7 +365,6 @@
             this.textBox2.Size = new System.Drawing.Size(154, 20);
             this.textBox2.TabIndex = 6;
             this.textBox2.TextChanged += new System.EventHandler(this.textBox2_TextChanged);
-            this.textBox2.Leave += new System.EventHandler(this.textBox2_Leave);
             // 
             // label6
             // 
