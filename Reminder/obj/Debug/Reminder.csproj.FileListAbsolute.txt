@@ -29,3 +29,14 @@ C:\Users\STUDENT-35\Documents\project\Reminder\obj\Debug\Reminder.csprojResolveA
 C:\Users\STUDENT-35\Documents\project\Reminder\obj\Debug\Reminder.Form1.resources
 C:\Users\STUDENT-35\Documents\project\Reminder\obj\Debug\Reminder.Properties.Resources.resources
 C:\Users\STUDENT-35\Documents\project\Reminder\obj\Debug\Reminder.csproj.GenerateResource.Cache
+C:\Users\Arpit\Downloads\Project-master\Project-master\Reminder\bin\Debug\Reminder.exe.config
+C:\Users\Arpit\Downloads\Project-master\Project-master\Reminder\obj\Debug\Reminder.exe
+C:\Users\Arpit\Downloads\Project-master\Project-master\Reminder\obj\Debug\Reminder.pdb
+C:\Users\Arpit\Downloads\Project-master\Project-master\Reminder\bin\Debug\SequenceDiagram1.mdf
+C:\Users\Arpit\Downloads\Project-master\Project-master\Reminder\bin\Debug\SequenceDiagram1_log.ldf
+C:\Users\Arpit\Downloads\Project-master\Project-master\Reminder\bin\Debug\Reminder.exe
+C:\Users\Arpit\Downloads\Project-master\Project-master\Reminder\bin\Debug\Reminder.pdb
+C:\Users\Arpit\Downloads\Project-master\Project-master\Reminder\obj\Debug\Reminder.csprojResolveAssemblyReference.cache
+C:\Users\Arpit\Downloads\Project-master\Project-master\Reminder\obj\Debug\Reminder.Form1.resources
+C:\Users\Arpit\Downloads\Project-master\Project-master\Reminder\obj\Debug\Reminder.Properties.Resources.resources
+C:\Users\Arpit\Downloads\Project-master\Project-master\Reminder\obj\Debug\Reminder.csproj.GenerateResource.Cache

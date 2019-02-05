@@ -53,12 +53,12 @@ namespace Reminder
                 MessageBox.Show("Number Can't be Empty");
                 textBox2.Focus();
             }
-            else if (System.Text.RegularExpressions.Regex.IsMatch(textBox2.Text, "[^0-9]"))
+            /*else if (System.Text.RegularExpressions.Regex.IsMatch(textBox2.Text, "[^0-9]"))
             {
                 MessageBox.Show("Number can't be in Characters");
                 textBox2.Focus();
                 textBox2.Text = textBox2.Text.Remove(textBox2.Text.Length - 1);
-            }
+            }*/
 
             else if (String.IsNullOrEmpty(textBox3.Text))
             {
@@ -155,9 +155,9 @@ namespace Reminder
                     label10.Text = full;
                     if (full.Equals(getdate().ToString()))
                     {
-                        MessageBox.Show("SMS Is Sent TO: " + too + " With Message: " + ms);
-                        HttpWebRequest request = WebRequest.Create("https://www.fast2sms.com/dev/bulk?authorization=BLmencQXlgDH2ErNVfa7qd8R4KFv1pWuOY9MobhiysAtGJ3UCTpqBhYDojG1Qx8IlJ6OX2rLcMRHua0N&sender_id=FSTSMS&message=" + ms + "&language=english&route=p&numbers=" + too) as HttpWebRequest;
-                        HttpWebResponse response = request.GetResponse() as HttpWebResponse;
+                        String u = "https://www.fast2sms.com/dev/bulk?authorization=BLmencQXlgDH2ErNVfa7qd8R4KFv1pWuOY9MobhiysAtGJ3UCTpqBhYDojG1Qx8IlJ6OX2rLcMRHua0N&sender_id=FSTSMS&message=" + ms + "&language=english&route=p&numbers=" + too;
+                        ProcessStartInfo sInfo = new ProcessStartInfo(u);
+                        Process.Start(sInfo);
                         
                     }
                 }
@@ -168,19 +168,19 @@ namespace Reminder
 
         public SqlConnection conn()
         {
-            string s = @"Data Source=(LocalDB)\v11.0;AttachDbFilename='C:\Users\Om\Documents\Visual Studio 2012\project\Reminder\SequenceDiagram1.mdf'";
+            string s = @"Data Source=(LocalDB)\v11.0;AttachDbFilename='C:\Users\Arpit\Downloads\Project-master\Project-master\Reminder\SequenceDiagram1.mdf'";
             SqlConnection con = new SqlConnection(s);
             return con;
         }
 
-        private void textBox2_TextChanged(object sender, EventArgs e)
+        /*private void textBox2_TextChanged(object sender, EventArgs e)
         {
             if (System.Text.RegularExpressions.Regex.IsMatch(textBox2.Text, "[^0-9]"))
             {
                 MessageBox.Show("Please enter only numbers.");
                 textBox2.Text = textBox2.Text.Remove(textBox2.Text.Length - 1);
             }
-        }
+        }*/
 
         private void dateTimePicker3_ValueChanged(object sender, EventArgs e)
         {
